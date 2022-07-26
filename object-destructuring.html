@@ -1,0 +1,48 @@
+<script>
+    const personOne = {
+        name: 'Ale',
+        age: 32,
+        address: {
+            cap: 70125,
+            state: 'Italy'
+        }
+    }
+
+    const personTwo = {
+        name: 'Marti',
+        age: 40,
+        address: {
+            cap: 80123,
+            state: 'Spain'
+        }
+    }
+
+    // While with the array the destructuring was based on position,
+    // with objects is based on the property name
+    const { name, age, address } = personOne;
+    console.log(`Name person 1: ${name}, age person 1: ${age}, cap: ${address.cap} , state ${address.state}`)
+
+    // there's a way to customize the name of the prop
+    const { name: nameTwo, age: ageTwo, address: { cap } } = personTwo;
+    console.log(`Name person 2: ${nameTwo}, age person 2: ${ageTwo}, cap :${cap}`)
+
+    const personThree = {
+        name: 'Peppniel',
+        age: 20,
+    }
+
+    // Merge the first element and the second one. The one with more 'priority' is the second element.
+    // If a property exists in both the first and second element, the second one will 'win'
+    const personFour = { ...personOne, ...personThree }
+    console.log(personFour)
+
+
+    // destucturing in function
+
+    printNameAndAge0 = (user) => console.log(`OLD WAY: Name : ${user.name}, age person: ${user.age}`)
+    printNameAndAge1 = ({name,age,favoriteColor="red"}) =>  console.log(`NEW WAY : ${name}, age person: ${age}, favorite color:${favoriteColor}`)
+
+    printNameAndAge0(personFour)
+    printNameAndAge1(personFour)
+
+</script>

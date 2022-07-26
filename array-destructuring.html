@@ -1,0 +1,40 @@
+<script>
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
+    const numbers = [1, 2, 3, 4, 5, 6]
+
+    // OLD WAY
+    // const a = alphabet[0]
+    // const b = alphabet[1]
+
+    // in this way we're assigning a to the first value of the array alphabet
+    // we're skipping the second element doing ,,
+    // we assign the 3rd element to c
+    // we're using the spread operator to assign the remaining values to the rest variable
+
+
+    const [a, , c, ...rest] = alphabet
+    console.log(a) // A
+    // console.log(b) this throws an error. b is not defined
+    console.log(c) // C
+    console.log(rest) // ['D', 'E', 'F']
+    console.log(rest[0]) // D
+
+
+    // DESTRUCTURING TO COMBINE 2 ARRAYS:
+    const combinedArray0 = [...alphabet, ...numbers]
+    console.log(combinedArray0)
+
+    const combinedArray1 = alphabet.concat(numbers)
+    console.log(combinedArray1)
+
+    // Other example
+    const sumAndMultiply = (a, b) => [a + b, a * b] // returns an array of 2 numbers. The sum and the multiply
+    console.log(sumAndMultiply(2, 3)) // [5,6]
+
+    //destructuring and default value
+    const [sum, multiply, division = 'no division'] = sumAndMultiply(2, 3)
+    console.log(`Sum: ${sum}, multiply: ${multiply}, division ${division}`)
+
+
+
+</script>
