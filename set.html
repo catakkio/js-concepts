@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    const getFirstValue = (set) => {
+        // if(set.has(10)) return set.values
+        if (set.size > 0) {
+            const parsedArrayFromSet = Array.from(set)
+            return parsedArrayFromSet[0];
+        }
+    }
+
+    const getFirstValue2ndVersion = (set) => set.values().next().value; // first will be equal to 0
+
+    const getSecondElem = (set) => {
+        const arrayFromSet = Array.from(set);
+        if(arrayFromSet.length>2) return arrayFromSet[1]
+    }
+
+    let set = new Set();
+
+    // One interesting thing about set is that in a set can't exist duplicte value. 
+    // 10 won't be added the second time
+    set.add(10);
+    set.add(20);
+    set.add(10);
+
+    // The same thing will happen if i try to add the same object. The randomObj will be add only 1 time
+    const randomObj = { id: 1, name: "luca" };
+    set.add(randomObj)
+    set.add(randomObj)
+
+    //But if i manually write the same object, the set will have the 2 same objects
+    set.add({ customValue: "custom", customName: "xxx" })
+    set.add({ customValue: "custom", customName: "xxx" })
+    console.log('Whole set:', set)
+
+    console.log("1st value of set 1st method:", getFirstValue(set))
+    console.log("1st value of set 2st method:", getFirstValue2ndVersion(set))
+    console.log("2nd value of set:", getSecondElem(set))
+
+</script>
