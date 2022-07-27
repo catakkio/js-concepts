@@ -1,0 +1,75 @@
+<script>
+
+    /////////// Interesting example from stackoverflow
+
+    function changeStuff(a, b, c) {
+        a = a * 10;
+        b.item = "changed";
+        c = { item: "changed" };
+    }
+
+    var num = 10;
+    var obj1 = { item: "unchanged" };
+    var obj2 = { item: "unchanged" };
+
+    changeStuff(num, obj1, obj2);
+
+    console.log(num); // 10
+    console.log(obj1.item); // changed
+    console.log(obj2.item); // unchanged
+
+    ///////// Replicating example by my own ////////
+
+    // 1st example: with string or numbers, 
+    console.log("1st example: string/number")
+
+    const changeString = (string) => string = "new string"
+
+    let string = "originalString"
+    changeString(string);
+    console.log(string) // -> originalString
+
+    // Conclusion: the parameter is passed by value.
+    // So If a function changes an argument's value, it does not change the parameter's original value.
+
+    // 2nd example with arrays. Also array are passed by value
+    console.log("3d example: array")
+
+    const resetArray = (array) => {
+        array = [];
+        console.log('array inside the function resdet array', array) // [] 
+    };
+
+    let arr = [1, 2, 3]
+    resetArray(arr);
+    console.log('array value outside the function ->', arr); // [1,2,3]
+    // Conclusion: also array are passed by VALUE
+
+    // 3d example. Change OBJECT property
+    console.log("3dh example: changing object property")
+
+    let person = { name: 'tiziano', surname: 'ferro' }
+    const resetPersonName = (person) => {
+        person.name = "emptyName"
+        console.log('person name inside function ->', person.name) // -> emptyName
+    }
+
+    resetPersonName(person)
+    console.log('person outside the function', person.name) // -> emptyName
+    // Conclusion: object properties are passed by REFERENCE. The value has changed
+
+    // 4d example. Change WHOLE OBJECT 
+    console.log("4th example: changing whole object")
+    const animal = { specie: "dog", name: "billy" }
+
+    const changeWholeObj = (animal) => {
+        animal = { specie: "cat", name: "totò" }
+        console.log('animal inside the function ->', animal) //-> {specie: 'cat', name: 'totò'}
+    }
+
+    changeWholeObj(animal);
+    console.log('animal outisde the function ->', animal) // -> {specie: 'dog', name: 'billy'}
+
+    // Conclusion: if I change the whole object, it doesn't change. 
+    // It changes only in the 3rd example, if I change a specific property of that object
+</script>
