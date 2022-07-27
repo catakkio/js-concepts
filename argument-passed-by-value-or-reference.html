@@ -1,7 +1,7 @@
 <script>
-
+    const greenColor = 'color: green'
     /////////// Interesting example from stackoverflow
-    console.log("%cStack overflow resumen",'color: green')
+    console.log("%cStack overflow resumen", greenColor)
 
     function changeStuff(a, b, c) {
         a = a * 10;
@@ -22,7 +22,7 @@
     ///////// Replicating example by my own ////////
 
     // 1st example: with string or numbers, 
-    console.log("%c1st example: string/number",'color: green')
+    console.log("%c1st example: string/number", greenColor)
 
     const changeString = (string) => string = "new string"
 
@@ -33,8 +33,9 @@
     // Conclusion: the parameter is passed by value.
     // So If a function changes an argument's value, it does not change the parameter's original value.
 
+    //////////////////////////////////////////////////////////////////////////////////
     // 2nd example with arrays. Also array are passed by value
-    console.log("%c2nd example: array",'color: green')
+    console.log("%c2nd example: array", greenColor)
 
     const resetArray = (array) => {
         array = [];
@@ -44,9 +45,9 @@
     let arr = [1, 2, 3]
     resetArray(arr);
     console.log('array value outside the function ->', arr); // [1,2,3]
-
+    //////////////////////////////////////////////////////////////////////////////////
     // example 2b
-    console.log("%cexample 2b",'color: green')
+    console.log("%cexample 2b", greenColor)
     let arr1 = []
     console.log('array before calling the function to ad an element', arr1)
 
@@ -56,11 +57,20 @@
     }
     addElemToArray(arr, 40)
     console.log('array after calling the function to ad an element', arr1)
-
+    //
     // Conclusion: also array are passed by VALUE. ( keep in mind that if i use the array.push(function), the push will change the object)
+    //
 
+    // example 2c: if i modify an array that hasn't been passed as parameter, the array will be modified
+    console.log("%cexample 2c", greenColor)
+    let arr2 = []
+    const addElemToExternalArray = (elemToAdd) => arr2.push(elemToAdd)
+    addElemToExternalArray("elementAddedToExternalArray")
+    console.log(arr2)  // ["elementAddedToExternalArray"]
+
+    //////////////////////////////////////////////////////////////////////////////////
     // 3d example. Change OBJECT property
-    console.log("%c3dh example: changing object property",'color: green')
+    console.log("%c3dh example: changing object property", greenColor)
 
     let person = { name: 'tiziano', surname: 'ferro' }
     const resetPersonName = (person) => {
@@ -72,8 +82,9 @@
     console.log('person outside the function', person.name) // -> emptyName
     // Conclusion: object properties are passed by REFERENCE. The value has changed
 
+    //////////////////////////////////////////////////////////////////////////////////
     // 4d example. Change WHOLE OBJECT 
-    console.log("%c4th example: changing whole object",'color: green')
+    console.log("%c4th example: changing whole object", greenColor)
     const animal = { specie: "dog", name: "billy" }
 
     const changeWholeObj = (animal) => {
