@@ -1,6 +1,7 @@
 <script>
 
     /////////// Interesting example from stackoverflow
+    console.log("%cStack overflow resumen",'color: green')
 
     function changeStuff(a, b, c) {
         a = a * 10;
@@ -21,7 +22,7 @@
     ///////// Replicating example by my own ////////
 
     // 1st example: with string or numbers, 
-    console.log("1st example: string/number")
+    console.log("%c1st example: string/number",'color: green')
 
     const changeString = (string) => string = "new string"
 
@@ -33,7 +34,7 @@
     // So If a function changes an argument's value, it does not change the parameter's original value.
 
     // 2nd example with arrays. Also array are passed by value
-    console.log("3d example: array")
+    console.log("%c2nd example: array",'color: green')
 
     const resetArray = (array) => {
         array = [];
@@ -43,10 +44,23 @@
     let arr = [1, 2, 3]
     resetArray(arr);
     console.log('array value outside the function ->', arr); // [1,2,3]
-    // Conclusion: also array are passed by VALUE
+
+    // example 2b
+    console.log("%cexample 2b",'color: green')
+    let arr1 = []
+    console.log('array before calling the function to ad an element', arr1)
+
+    const addElemToArray = (array, elemToAdd) => {
+        array.push(elemToAdd);
+        console.log('array inside the function to ad an element', array) // 
+    }
+    addElemToArray(arr, 40)
+    console.log('array after calling the function to ad an element', arr1)
+
+    // Conclusion: also array are passed by VALUE. ( keep in mind that if i use the array.push(function), the push will change the object)
 
     // 3d example. Change OBJECT property
-    console.log("3dh example: changing object property")
+    console.log("%c3dh example: changing object property",'color: green')
 
     let person = { name: 'tiziano', surname: 'ferro' }
     const resetPersonName = (person) => {
@@ -59,7 +73,7 @@
     // Conclusion: object properties are passed by REFERENCE. The value has changed
 
     // 4d example. Change WHOLE OBJECT 
-    console.log("4th example: changing whole object")
+    console.log("%c4th example: changing whole object",'color: green')
     const animal = { specie: "dog", name: "billy" }
 
     const changeWholeObj = (animal) => {
