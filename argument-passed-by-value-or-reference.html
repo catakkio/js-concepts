@@ -43,21 +43,23 @@
     // So If a function changes an argument's value, it does not change the parameter's original value.
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // 2a example with arrays. Also array are passed by value
-    console.log("%c2nd example: array", greenColor)
+    // 2a example with arrays. Array are passed by reference. In this specific case there is something different
+    console.log("%c2a example: array", greenColor)
 
     const resetArray = (arrayParam) => {
-        console.log('array inside the reset function, BEFORE resetting it ->', arrayParam); // [1,2,3]
         arrayParam = []; // IMPO: here is like we're creating a reference to a new array.
         arrayParam.push(1)
         console.log('array inside the reset function, AFTER resetting it ->', arrayParam) // [1] 
     };
 
-    debugger
     let arr = [1, 2, 3]
     console.log('array value outside the function before calling it->', arr);
     resetArray(arr);
     console.log('array value outside the function after calling it->', arr); // [1,2,3]
+
+
+
+
     /////////////////////////////////////////////// example 2b /////////////////////////////////////////////////////////////////////////////////////////////////////////
     const addAndChangeElemToArray = (arrayParam, elemToAdd) => {
         arrayParam[0] = "changed value"
