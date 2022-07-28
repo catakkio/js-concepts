@@ -1,0 +1,28 @@
+<script>
+    let arr0 = [1, 2, 3]
+    let arr1 = [1, 2, 3]
+    let arr2 = [1, 2, 3]
+    // IMPURE FUNCTION
+    // changes the variables outside of the funciton, every time is called returns a different output
+    addElemToArrayImpure = (elem) => arr0.push(elem)
+    addElemToArrayImpure(50)
+    addElemToArrayImpure(51)
+    console.log(arr0) // [1, 2, 3, 50, 51]
+
+    // PURE FUNCTION
+    // we create a deep copy of the array and then add the element. 
+    // The outside variables are not changed and all the time that we call the function returns the same output
+    addElemToArrayPure = (array, elem) => [...array, elem]
+    addElemToArrayPure(arr1,50);
+    addElemToArrayPure(arr1,51);
+    console.log(arr1) // [1, 2, 3]
+
+    // IMPURE FUNCTION
+    // We don't change the outside variables, but adding a random number, the output will be different all the time
+    addElemToArrayImpure1 = (array, elem) => [...array, elem,Math.random()]
+
+    
+    console.log(addElemToArrayImpure1(arr2,50)) //  [1, 2, 3, 50, 0.06788208175750277]
+    console.log(addElemToArrayImpure1(arr2,50)) //  [1, 2, 3, 50, 0.3716566529046734]
+  
+</script>

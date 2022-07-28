@@ -11,7 +11,7 @@
 
     const getSecondElem = (set) => {
         const arrayFromSet = Array.from(set);
-        if(arrayFromSet.length>2) return arrayFromSet[1]
+        if (arrayFromSet.length > 2) return arrayFromSet[1]
     }
 
     let set = new Set();
@@ -27,7 +27,7 @@
     set.add(randomObj)
     set.add(randomObj)
 
-    //But if i manually write the same object, the set will have the 2 same objects
+    //But if i manually write the same object, the set will have the 2 objects
     set.add({ customValue: "custom", customName: "xxx" })
     set.add({ customValue: "custom", customName: "xxx" })
     console.log('Whole set:', set)
