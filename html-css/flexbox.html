@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flexbox</title>
+</head>
+
+<body>
+    <div class="flexbox-container">
+        <div class="flexbox-item flexbox-item-1 "></div>
+        <div class="flexbox-item flexbox-item-2 "></div>
+        <div class="flexbox-item flexbox-item-3 "></div>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    .flexbox-container {
+        display: flex;
+        background-color: yellow;
+
+        flex-direction: row;
+        /* The default flex direction is row. We have 2 axis: the MAIN AXIS and the CROSS AXIS */
+
+        /* Align items and justify content are the 2 property more used for flexboxes */
+        align-items: baseline;
+        justify-content: space-between;
+
+
+        align-content: center;
+        /* align-content is usde only in multi lines flex boxes. */
+    }
+
+    .flexbox-item {
+        width: 200px;
+        margin: 10px;
+        border: 3px solid black;
+        background-color: gainsboro;
+    }
+
+    .flexbox-item-1 {
+        min-height: 100px;
+        flex-shrink: 0;
+        /* quando riduci lo schermo, il primo elemento terra la sua larghezza fissa e non verra compreso*/
+        order: 3;
+        /*Cambia l'ordine visuale degli elementi. Puo creare problemi con l'accessibilita però. Evitalo*/
+    }
+
+    .flexbox-item-2 {
+        min-height: 200px;
+        flex-grow: 1;
+        /* Se avanza spazio, questo elemetno si prendera tutta la larghezza*/
+    }
+
+    .flexbox-item-3 {
+        min-height: 300px;
+        order: 1;
+    }
+</style>

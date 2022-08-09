@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grid</title>
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item grid-item-1 ">1</div>
+        <div class="grid-item grid-item-2 ">2</div>
+        <div class="grid-item grid-item-3 ">3</div>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        /*means one fraction and 2 fraction*/
+        /* grid-template-columns: repat (4,100px);  means that the template is setted for 4 columns of 100px each*/
+    }
+
+    .grid-item {
+        background-color: darkcyan;
+        width: 100%;
+        height: 100px;
+        margin: 10px;
+        border: 3px solid black;
+    }
+
+    /* .grid-item-1 {}
+
+    .grid-item-2 {}
+
+    .grid-item-3 {} */
+</style>
