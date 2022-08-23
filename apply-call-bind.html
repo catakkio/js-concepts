@@ -1,0 +1,21 @@
+<script>
+    const obj = { num: 2 }
+
+    function sum(a, b) {
+        return this.num + a + b
+    }
+
+    console.log(sum(2, 3)) // undefinded because this.num is not defined
+    console.log(sum.call(obj, 2, 3)) // 7
+    console.log(sum.apply(obj, [2, 3])) // 7 - same as call, but uses an array for arguments
+
+    const func = sum.bind(obj, 2, 3) // bind doesn't call immediately the function. But returns the function with the new binding
+    console.log(func()) // 7
+
+
+    /**
+     * IMPORTANT:
+     * apply, call and bind don't work with arrow functions, 
+     * because arrow functions doesn't create a new functional context.
+     * 'this' will always refer to the context in which it was defined. */
+</script>
