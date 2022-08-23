@@ -18,7 +18,23 @@
         console.log('newFetch', data) // we have to use again 'await' because response.json() return a promise
     }
 
+    const newFetchMultipleUrls = async () => {
+        const urls = [
+            "https://jsonplaceholder.typicode.com/users",
+            "https://jsonplaceholder.typicode.com/albums",
+            "https://jsonplaceholder.typicode.com/posts"
+        ]
+
+        const [users, albums, posts] = await Promise.all(
+            urls.map(url => fetch(url)
+                .then(resp => resp.json()))
+        )
+        // if even one of the 3 fetch call fails an aerror will be thrown
+        console.log('newFetchMultipleUrls', [users, albums, posts])
+    }
+
     oldFetch()
     newFetch()
+    newFetchMultipleUrls();
 
 </script>
