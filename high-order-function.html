@@ -1,0 +1,17 @@
+<script>
+
+    const higherOrder = (fn) => {
+        fn();
+    }
+    higherOrder(function () { console.log("Hello world 1") });
+
+
+    function higherOrder2() {
+        return function fn() {
+            console.log("Hello world 2")
+        }
+    }
+
+    let fn = higherOrder2()
+    fn();
+</script>

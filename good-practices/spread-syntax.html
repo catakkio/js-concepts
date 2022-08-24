@@ -13,8 +13,8 @@
 
     // OR
 
-    const lvl0 = Object.assign(pikachu, stats)
-    const lvl1 = Object.assign(pikachu, { hp: 45 })
+    const lvl0_bad = Object.assign(pikachu, stats)
+    const lvl1_bad = Object.assign(pikachu, { hp: 45 })
 
     'Good Object Code ✅'
 
@@ -42,6 +42,15 @@
     pokemon = ['Bulbasaur', ...pokemon, 'Metapod', 'Weedle',]
 
 
+    /////// Other examples
 
+    const animals = {
+        tiger: 23,
+        lion: 10,
+        dog: 4
+    }
+
+    const { tiger, dog, lion } = animals
+    console.log(tiger, dog, lion)
 
 </script>
