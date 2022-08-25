@@ -1,0 +1,72 @@
+<script>
+    // Copy and paste the exercise that you want to check in the console
+
+
+    //////////////// 1st exercise ////////////////
+    console.log('first', var1);  // 1st, undefined
+    var var1 = 1;
+
+    function func() {
+        console.log('third log', var1); // 3rd, undefined
+        var var1 = 2;
+        console.log('4th log', var1);   // 4th, 2
+    }
+    var var1 = 3;
+    console.log('second log', var1);      //2nd, 3
+    func();
+
+    //////////////// 2nd exercise //////////////
+
+    function func1() {
+        console.log(var01);   // var 1 outside of the function is hoisted and goes at the top. So logs undefined
+        // console.log(let01) error: let01 is not defined
+        if (true) {
+            var var01 = 2;
+            let let01 = 23;
+        }
+        console.log(var01);   // 2
+        //console.log(let01);   // error: let01 is not defined
+    }
+    var var01 = 3;
+    func1();
+
+    //////////////// 3dh exercise //////////////
+
+    console.log(i); //undefined
+    for (var i = 0; i < 11; i++) {
+        console.log('asdf');
+    }
+    console.log(i);  //11
+
+    const arr = [10, 12, 15, 21];
+
+    //////////////// 4th exercise //////////////
+
+    export const ex1 = () => {
+        for (var i = 0; i < arr.length; i++) {
+            setTimeout(() => {
+                console.log("Index: " + i + ", element: " + arr[i]); //logs -> Index: 4, element: undefined . Because the i++ increase i from 3 to 4 at the last round of the for
+            }, 3000);
+        }
+
+        console.log(i);
+    };
+
+    ex1();
+
+    //////////////// 5th exercise //////////////
+
+
+    export const ex1_2 = () => {
+        for (let i = 0; i < arr.length; i++) {
+            // using the ES6 let syntax, it creates a new binding
+            // every single time the function is called
+            // read more here: http://exploringjs.com/es6/ch_variables.html#sec_let-const-loop-heads
+            setTimeout(() => {
+                console.log("> Index: " + i + ", element: " + arr[i]); // 
+            }, 3000);
+        }
+    };
+
+
+</script>
