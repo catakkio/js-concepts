@@ -1,6 +1,18 @@
 <script>
     // Copy and paste the exercise that you want to check in the console
 
+    /////////// Important example of hoisting //////////
+    // 1st case with var in the loop
+    for (var i = 0; i < 11; i++) {
+        console.log("asdf");
+    }
+    console.log(i); //11
+
+    // 2nd case with let in the loop
+    for (let i = 0; i < 11; i++) {
+        console.log("asdf");
+    }
+    console.log(i); // error: i is not defined
 
     //////////////// 1st exercise ////////////////
     console.log('first', var1);  // 1st, undefined

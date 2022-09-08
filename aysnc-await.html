@@ -9,7 +9,12 @@
                 response = jsonData
                 console.log(jsonData)
                 console.log('response assigned with value', response)
-            })
+            }).catch(e =>
+                console.log('error', e)
+            )
+
+
+        console.log('this will be displayed later')
     }
 
     const newFetch = async () => {

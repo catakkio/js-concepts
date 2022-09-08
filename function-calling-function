@@ -1,0 +1,17 @@
+<script>
+
+    function print(value) {
+        console.log(value)
+    }
+
+    function useCallBack(callbackFunction) {
+        callbackFunction('hello')
+    }
+
+    useCallBack(print) // prints hello.
+// don't do: useCallBack(print())
+
+
+// or as alternative
+
+</script>
