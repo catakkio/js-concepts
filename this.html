@@ -42,5 +42,6 @@
     // Related to this, there are also call, apply and bind functions
     const obj = { name: 'Tommy', years: 5 }
     printName.call(obj);
+    printNameBis.call(obj) // with arrow function call doesn't apply, because with arrow function this is related to where the function is DEFINED, not to where the function is called
 
 </script>
