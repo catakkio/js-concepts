@@ -1,47 +1,65 @@
 <script>
-    let name = 'Alessandro'
+  let name = "Alessandro";
 
-    function printName() {
-        console.log('Example 1 this:', this) // Window
-        console.log('Example 1 this.name:', this.name) // undefined
-        console.log('Example 1 global name:', name) // Alessandro
-        logSeparator()
-    }
+  function printName() {
+    console.log("Example 1 this:", this); // Window
+    console.log("Example 1 this.name:", this.name); // undefined
+    console.log("Example 1 global name:", name); // Alessandro
+    logSeparator();
+  }
 
-    const printNameBis = () => {
-        console.log('Example 1bis this:', this) // Window
-        console.log('Example 1bis this.name:', this.name) // undefined
-        console.log('Example 1bis global name', name)
-        logSeparator()
-    }
+  const printNameBis = () => {
+    console.log("Example 1bis this:", this); // Window
+    console.log("Example 1bis this.name:", this.name); // undefined
+    console.log("Example 1bis global name", name);
+    logSeparator();
+  };
 
-    const exampleTwo = {
-        nameTwo: 'Martina',
-        getNameTwo() {
-            console.log('Example 2 this:', this) // exampleTwo object 
-            console.log('Example 2 this name:', this.nameTwo) // Martina
-            console.log('Example 2 global name', name) // Alessandro
-            logSeparator()
-        }
-    }
+  const exampleTwo = {
+    nameTwo: "Martina",
+    getNameTwo() {
+      console.log("Example 2 this:", this); // exampleTwo object
+      console.log("Example 2 this name:", this.nameTwo); // Martina
+      console.log("Example 2 global name", name); // Alessandro
+      logSeparator();
+    },
+  };
 
-    const logSeparator = () => console.log('-----------------------------')
+  const logSeparator = () => console.log("-----------------------------");
 
-
-    /* 
+  /* 
     IMPO: 'this' value always depend on the object that is invoking the function
     So when we're calling the example one, this refers to the Window object, and there is no this.name
     
     In the second example, at the time of invocation, the getName function is a property of the object obj , 
     therefore, this keyword will refer to the object exampleTwo
     */
-    printName(); // 
-    printNameBis();
-    exampleTwo.getNameTwo();
+  printName(); //
+  printNameBis();
+  exampleTwo.getNameTwo();
 
-    // Related to this, there are also call, apply and bind functions
-    const obj = { name: 'Tommy', years: 5 }
-    printName.call(obj);
-    printNameBis.call(obj) // with arrow function call doesn't apply, because with arrow function this is related to where the function is DEFINED, not to where the function is called
+  // Related to this, there are also call, apply and bind functions
+  const obj = { name: "Tommy", years: 5 };
+  printName.call(obj);
+  printNameBis.call(obj); // with arrow function call doesn't apply, because with arrow function this is related to where the function is DEFINED, not to where the function is called
 
+  // ---------------------------------------------------
+  // OTHER EXERCISE
+
+  const obj1 = {
+    name: "ss",
+    getName1: function () {
+      return this.name;
+    },
+    getName2: () => {
+      return this.name;
+    },
+    getName3() {
+      return this.name;
+    },
+  };
+
+  console.log(obj1.getName1()); // ss
+  console.log(obj1.getName2()); // undefined
+  console.log(obj1.getName3()); // ss
 </script>

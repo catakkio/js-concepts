@@ -1,0 +1,55 @@
+<script>
+  function functionScopeVarExample() {
+    if (true) {
+      var x = 10;
+    }
+    console.log(x); // Outputs 10
+  }
+  functionScopeVarExample();
+  // In this example, x is defined using var within an if block, but it is accessible outside of the block because var has function scope
+
+  /*----------------------------------------------------------*/ ù;
+  function functionScopeLetExample() {
+    if (true) {
+      let y = 20;
+    }
+    console.log(y); // Throws an error (y is not defined)
+  }
+  functionScopeLetExample();
+  /* Here, y is defined using let within an if block, but it is not accessible outside of the block because let has block scope*/
+
+  /*----------------------------------------------------------*/ ù;
+  function blockScopeLetExample() {
+    for (let i = 0; i < 5; i++) {
+      // i is block-scoped to the loop
+      console.log(i);
+    }
+    // i is not accessible here
+    console.log(i); // Throws an error (i is not defined)
+  }
+  blockScopeLetExample();
+  // In this case, i is defined with let within the for loop, and it is only accessible within the loop block.
+
+  /*----------------------------------------------------------*/
+  function varVsLetScopeExample() {
+    if (true) {
+      var a = 30;
+      let b = 40;
+    }
+    console.log(a); // Outputs 30 (var has function scope)
+    console.log(b); // Throws an error (b is not defined). NOTE ERROR, not undefinde
+  }
+  varVsLetScopeExample();
+
+  /*----------------------------------------------------------*/
+  function nestedBlockScopeExample() {
+    let outerVar = 50;
+    if (true) {
+      let innerVar = 60;
+      console.log(innerVar); // Outputs 60
+    }
+    console.log(outerVar); // Outputs 50
+    console.log(innerVar); // Throws an error (innerVar is not defined)
+  }
+  nestedBlockScopeExample();
+</script>
