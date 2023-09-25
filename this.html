@@ -11,7 +11,7 @@
   const printNameBis = () => {
     console.log("Example 1bis this:", this); // Window
     console.log("Example 1bis this.name:", this.name); // undefined
-    console.log("Example 1bis global name", name);
+    console.log("Example 1bis global name", name); // Alessandro
     logSeparator();
   };
 
@@ -27,11 +27,11 @@
 
   const logSeparator = () => console.log("-----------------------------");
 
-  /* 
+  /*
     IMPO: 'this' value always depend on the object that is invoking the function
     So when we're calling the example one, this refers to the Window object, and there is no this.name
-    
-    In the second example, at the time of invocation, the getName function is a property of the object obj , 
+
+    In the second example, at the time of invocation, the getName function is a property of the object obj ,
     therefore, this keyword will refer to the object exampleTwo
     */
   printName(); //
@@ -43,23 +43,69 @@
   printName.call(obj);
   printNameBis.call(obj); // with arrow function call doesn't apply, because with arrow function this is related to where the function is DEFINED, not to where the function is called
 
-  // ---------------------------------------------------
-  // OTHER EXERCISE
+  /******************* THIS & ARROW FUNCTIONS ***************************/
+  const thisAndArrowFunctionEser1 = () => {
+    const obj1 = {
+      name: "ss",
+      getName1: function () {
+        return this.name;
+      },
+      getName2: () => {
+        return this.name;
+      },
+      getName3() {
+        return this.name;
+      },
+    };
 
-  const obj1 = {
-    name: "ss",
-    getName1: function () {
-      return this.name;
-    },
-    getName2: () => {
-      return this.name;
-    },
-    getName3() {
-      return this.name;
-    },
+    console.log(obj1.getName1()); // ss
+    console.log(obj1.getName2()); // undefined
+    console.log(obj1.getName3()); // ss
+  };
+
+  const thisAndArrowFunctionEser2 = () => {
+    var name =
+      "Ho Capito!: In arrow function, 'this' has no value ( context to be precise ). It gets the value  (context) of the enclosing(parent) context WHEN they're created";
+    const obj1 = {
+      name: "ss",
+      getName1: function () {
+        return this.name;
+      },
+      getName2: () => {
+        return this.name;
+      },
+      getName3() {
+        return this.name;
+      },
+    };
   };
 
   console.log(obj1.getName1()); // ss
-  console.log(obj1.getName2()); // undefined
+  console.log(obj1.getName2()); // Ho:capito... Xkè this non ha contesto ( o valore diciamo) nelle arrow function. This prende il contesto del padre al momento della dichiarazione della funzione.
   console.log(obj1.getName3()); // ss
+
+  /******************- This & arrow functions -*************************/
+
+  class Person {
+    constructor(name) {
+      this.name = name;
+    }
+
+    printNameArrow = () => {
+      setTimeout(() => {
+        console.log("Arrow:" + this.name);
+      }, 1);
+    };
+
+    printNameStandardFunction() {
+      setTimeout(function () {
+        console.log("Function:" + this.name);
+      }, 1);
+    }
+  }
+
+  var person = new Person("Ale");
+
+  person.printNameArrow();
+  person.printNameStandardFunction();
 </script>
