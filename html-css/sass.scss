@@ -1,39 +1,39 @@
 $red: hsl(0, 100%, 50%);
 $green: #1d941dd6;
 $orange: #ffa500;
-
+$orange: #f6ae2d;
 
 button {
-    font-size: 20px;
-    margin: 10px;
+  font-size: 20px;
+  margin: 10px;
 
-    &.danger {
-        background-color: $red;
-    }
+  &.danger {
+    background-color: $red;
+  }
 
-    &.success {
-        background-color: $green
-    }
+  &.success {
+    background-color: $green;
+  }
 }
 
 @mixin cool-button {
-    display: flex;
-    color: $green;
+  display: flex;
+  color: $green;
 }
 
 @mixin cool-button-1($color, $bg) {
-    // mixin can also accept parameters
-    display: flex;
-    color: $color;
-    background: $bg;
+  // mixin can also accept parameters
+  display: flex;
+  color: $color;
+  background: $bg;
 }
 
 .btn-orange {
-    @include cool-button()
+  @include cool-button();
 }
 
 .btn-orange-1 {
-    @include cool-button-1($red, $orange )
+  @include cool-button-1($red, $orange);
 }
 
 // HTML TEST CODE

@@ -1,0 +1,42 @@
+<script>
+    const promise = new Promise((customResolve, customReject) => {
+        console.log("do something");
+
+        if (true) {
+            customResolve("it worked");
+        } else {
+            customReject("error, ti broke");
+        }
+    });
+
+    promise
+        .then((result) => result + "!!!!")
+        .then((result2) => console.log(result2))
+        .then((result3) => {
+            throw Error;
+        })
+        .catch((e) => {
+            //this catch can catch any error in all the previous 'then'.
+            // n.b in the PREVIOUS. If an error is thrown after the catch, the error won't be catched
+            console.log("error", e);
+        });
+
+    const promise2 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 1000, "prom 2");
+    });
+
+    const promise3 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 3000, "prom 3");
+    });
+
+    const promise4 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 6000, "prom 4");
+    });
+
+    // Resolvess all the promises. When all the promises are resolved, logs the values
+    Promise.all([promise, promise2, promise3, promise4]).then((values) => {
+        console.log(values);
+    });
+    console.log("after promise");
+
+</script>

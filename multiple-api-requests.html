@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Handle multiple api requests</title>
+  </head>
+  <body style="display: flex; justify-content: center">
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
+        gap: 1rem;
+        max-width: fit-content;
+      "
+    >
+      <button onclick="getSingleApi()">Single get request</button>
+      <button onclick="postSingleApi()">Single post request</button>
+      <button onclick="fetchMultipleApiWithNoError()">
+        Array of fetch request successful
+      </button>
+      <button
+        style="color: orange"
+        onclick="fetchMultipleApiScenarioErrorHandledByServer()"
+      >
+        Array of fetch request with server error
+      </button>
+      <button
+        style="color: orange"
+        onclick="fetchMultipleApiScenarioErrorNotHandledByServer()"
+      >
+        Array of fetch request if no api returns error
+      </button>
+      <button style="color: orange" onclick="fetchMultipleAPIHandlinigErrors()">
+        Fetch Multiple API Handlinig Errors
+      </button>
+      <button onclick="sequenceOfFetchApi()">Sequence of fetch request</button>
+    </div>
+  </body>
+  <script>
+    fetchApi = async (url, options) => {
+      const resp = options ? await fetch(url, options) : await fetch(url);
+      if (resp.ok) {
+        const data = await resp.json();
+        return data;
+      } else {
+        throw new Error(resp.status);
+      }
+    };
+
+    getSingleApi = async () => {
+      console.log(await fetchApi("https://jsonplaceholder.typicode.com/posts"));
+    };
+
+    postSingleApi = async () => {
+      const bodyRequest = {
+        title: "Custom title",
+        body: "custom content",
+        userId: 1,
+      };
+
+      console.log(
+        await fetchApi("https://jsonplaceholder.typicode.com/posts", {
+          method: "POST",
+          body: JSON.stringify(bodyRequest),
+        })
+      );
+    };
+
+    /*
+    * If one of the promises resolves to a response with a non-OK status,
+    * that promise is considered fulfilled within the context of Promise.all() and data will be logged.
+    * fetchMultipleApiWithNoErrorScenarioErrorHandled scenario (look function below)
+
+    * If one of the promises encounters an error during its execution,
+    * such as a network failure or a rejection explicitly triggered within the promise's executor function,
+    * then the promise.All will immediately stop
+    */
+    fetchMultipleApiWithNoError = async () => {
+      apis = [
+        fetch("https://jsonplaceholder.typicode.com/posts"),
+        fetch("https://jsonplaceholder.typicode.com/comments"),
+        fetch("https://jsonplaceholder.typicode.com/albums"),
+      ];
+
+      const responses = await Promise.all(apis);
+      const data = await Promise.all(responses.map((resp) => resp.json()));
+      console.log(data);
+    };
+
+    fetchMultipleApiScenarioErrorHandledByServer = async () => {
+      const wrongApi = "https://jsonplaceholder.typicode.com/aaaaaa";
+      apis = [
+        fetch("https://jsonplaceholder.typicode.com/posts"),
+        fetch(wrongApi),
+        fetch("https://jsonplaceholder.typicode.com/albums"),
+      ];
+
+      const responses = await Promise.all(apis);
+      const data = await Promise.all(responses.map((resp) => resp.json()));
+      console.log(data); // data will be fulfilled expect for data[1] that corresponds to wrongApi
+    };
+
+    fetchMultipleApiScenarioErrorNotHandledByServer = async () => {
+      const apiNonExisting = "https://noServer";
+      apis = [
+        fetch("https://jsonplaceholder.typicode.com/posts"),
+        fetch(apiNonExisting),
+        fetch("https://jsonplaceholder.typicode.com/albums"),
+      ];
+
+      const responses = await Promise.all(apis);
+      const data = await Promise.all(responses.map((resp) => resp.json()));
+      console.log(data); // error will be displayed and no data
+    };
+
+    fetchMultipleAPIHandlinigErrors = async () => {
+      const apiNonExisting = "lollo";
+      const requests = [
+        fetch("https://jsonplaceholder.typicode.com/posts"),
+        fetch(apiNonExisting),
+        Promise.reject("msg custom"),
+        fetch("https://jsonplaceholder.typicode.com/albums"),
+      ];
+
+      // Promise.allSettled is able to handle successful or reject promises
+      const requestsResponse = await Promise.allSettled(requests);
+      const data = await Promise.all(
+        requestsResponse.map((resp) => {
+          if (resp.status === "fulfilled" && resp?.value?.json) {
+            return resp.value.json();
+          }
+        })
+      );
+
+      console.log("data containing also rejected promises", data);
+    };
+
+    sequenceOfFetchApi = async () => {
+      const firstRequest = await fetch(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+
+      if (firstRequest.ok) {
+        const firstData = await firstRequest.json();
+        console.log("first data", firstData);
+        const secondRequest = await fetch(
+          "https://jsonplaceholder.typicode.com/albums"
+        );
+        if (secondRequest.ok) {
+          const secondData = await secondRequest.json();
+          console.log("second data", firstData);
+
+          const thirdRequest = await fetch(
+            "https://jsonplaceholder.typicode.com/posts"
+          );
+
+          if (thirdRequest.ok) {
+            const data = await thirdRequest.json();
+            console.log("third data", data);
+          }
+        }
+      }
+    };
+  </script>
+</html>
