@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Observable</title>
+  </head>
+  <body>
+    <p>Open the console to see the observable working</p>
+    <button onclick="subscribeToMouseMovements()">
+      Subscribe to mouse movements
+    </button>
+    <button onclick="unsubscribeToMouseMovements()">
+      Unsubscribe from mouse movements
+    </button>
+    <script src="./rxjs.umd.min.js"></script>
+
+    <script>
+      let mouseMove$ = null;
+      let subscription = null;
+
+      function initializeObservable() {
+        console.log("entrato");
+        const { Observable } = rxjs;
+        const observable = new Observable((subscriber) => {
+          subscriber.next(1);
+          subscriber.next(2);
+          subscriber.next(3);
+          subscriber.complete(); // Completing the observable
+        });
+
+        observable.subscribe({
+          next(data) {
+            console.log(data);
+          },
+          error(error) {
+            console.error(error);
+          },
+          complete() {
+            console.log("completed observable");
+          },
+        });
+      }
+
+      function createSubscriptionToMouseMovements() {
+        const { fromEvent } = rxjs;
+        // Get the document element to subscribe to mouse movement events (in this case, the document itself)
+        const doc = document.documentElement;
+        // Create an observable for the mousemove event on the document
+        mouseMove$ = fromEvent(doc, "mousemove");
+      }
+
+      function subscribeToMouseMovements() {
+        if (!mouseMove$) {
+          createSubscriptionToMouseMovements();
+        }
+        // Subscribe to the observable to receive mouse movement events
+        subscription = mouseMove$.subscribe((event) => {
+          console.log("Mouse X:", event.clientX, "Mouse Y:", event.clientY);
+        });
+      }
+
+      function unsubscribeToMouseMovements() {
+        subscription?.unsubscribe();
+      }
+
+      initializeObservable();
+    </script>
+  </body>
+</html>
